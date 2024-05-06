@@ -1,4 +1,4 @@
-package com.my.notes.ui.theme
+package com.my.notes.feature_note.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
