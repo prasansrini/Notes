@@ -1,4 +1,4 @@
-package com.my.notes.feature_note.di
+package com.my.notes
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
