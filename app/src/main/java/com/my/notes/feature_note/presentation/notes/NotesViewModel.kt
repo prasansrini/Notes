@@ -37,7 +37,7 @@ class NotesViewModel(
 					return
 				}
 
-
+				getNotes(event.noteOrder)
 			}
 
 			is NotesEvent.Delete -> {
