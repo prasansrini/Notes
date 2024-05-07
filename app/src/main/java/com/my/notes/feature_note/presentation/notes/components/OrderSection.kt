@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.unit.dp
 import com.my.notes.feature_note.domain.util.NoteOrder
 import com.my.notes.feature_note.domain.util.OrderByType
@@ -21,6 +24,14 @@ fun OrderSection(
 	Column(
 		modifier = modifier
 	) {
+		Divider(
+			color = LightGray,
+			modifier = Modifier
+				.height(1.dp)
+				.fillMaxWidth()
+				.padding(horizontal = 12.dp)
+		)
+
 		Row(
 			modifier = Modifier.fillMaxWidth()
 		) {
@@ -53,7 +64,13 @@ fun OrderSection(
 			)
 		}
 
-		Spacer(modifier = Modifier.height(16.dp))
+		Divider(
+			color = LightGray,
+			modifier = Modifier
+				.height(1.dp)
+				.fillMaxWidth()
+				.padding(horizontal = 12.dp)
+		)
 
 		Row(
 			modifier = Modifier.fillMaxWidth()
@@ -76,5 +93,13 @@ fun OrderSection(
 
 			)
 		}
+
+		Divider(
+			color = LightGray,
+			modifier = Modifier
+				.height(1.dp)
+				.fillMaxWidth()
+				.padding(horizontal = 12.dp)
+		)
 	}
 }
