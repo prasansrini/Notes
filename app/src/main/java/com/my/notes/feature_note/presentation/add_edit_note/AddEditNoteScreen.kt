@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -31,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -81,18 +83,17 @@ fun AddEditNoteScreen(
 		}
 	}
 
-	Scaffold(floatingActionButton = {
-		FloatingActionButton(
-			onClick = {
+	Scaffold(
+		floatingActionButton = {
+			FloatingActionButton(onClick = {
 				viewModel.onEvent(AddEditNoteEvent.SaveNote)
+			}) {
+				Icon(
+					imageVector = Icons.Default.Save,
+					contentDescription = "Save note"
+				)
 			}
-		) {
-			Icon(
-				imageVector = Icons.Default.Save,
-				contentDescription = "Save note"
-			)
-		}
-	},
+		},
 		snackbarHost = { SnackbarHost(hostState = scaffoldState) }) {
 		Column(
 			modifier = Modifier
@@ -106,6 +107,17 @@ fun AddEditNoteScreen(
 					.padding(8.dp),
 				horizontalArrangement = Arrangement.SpaceBetween
 			) {
+				Icon(imageVector = Icons.Default.ArrowBack,
+					contentDescription = "Back",
+					modifier = Modifier
+						.size(40.dp)
+						.padding(4.dp)
+						.align(Alignment.CenterVertically)
+						.clickable {
+							navController.navigateUp()
+							viewModel.onEvent(AddEditNoteEvent.SaveNote)
+						})
+
 				Note.noteColors.forEach { color ->
 					val colorInt = color.toArgb()
 					Box(modifier = Modifier
