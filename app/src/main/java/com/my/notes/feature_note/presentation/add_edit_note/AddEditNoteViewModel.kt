@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.toArgb
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.my.notes.feature_note.domain.model.InvalidNoteException
@@ -17,8 +18,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddEditNoteViewModel @Inject constructor(
-		private val noteUseCases: NoteUseCases
+		private val noteUseCases: NoteUseCases, savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+	init {
+		savedStateHandle
+			.get<Int>("noteId")
+			?.let { noteId ->
+				if (noteId != -1) {
+					viewModelScope.launch {
+						noteUseCases
+							.getNote(noteId)
+							?.also { note ->
+								currentNoteId = note.id
+								_noteTitle.value = noteTitle.value.copy(
+									text = note.title,
+									isHintVisible = false
+								)
+								_noteContent.value = noteContent.value.copy(
+									text = note.content,
+									isHintVisible = false
+								)
+								_noteColor.value = note.color
+							}
+					}
+				}
+			}
+	}
+
 	private val _noteTitle = mutableStateOf(
 		NoteTextFieldState(
 			hint = "Enter title..."
@@ -69,7 +96,7 @@ class AddEditNoteViewModel @Inject constructor(
 				)
 			}
 
-			is AddEditNoteEvent.EnterContentFocus -> {
+			is AddEditNoteEvent.ChangeContentFocus -> {
 				_noteContent.value = noteContent.value.copy(
 					isHintVisible = !event.focusState.isFocused && noteContent.value.text.isBlank()
 				)
