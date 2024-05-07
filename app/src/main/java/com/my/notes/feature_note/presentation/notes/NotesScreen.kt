@@ -6,7 +6,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -99,8 +98,8 @@ fun NotesScreen(
 				exit = fadeOut() + slideOutVertically()
 			) {
 				OrderSection(modifier = Modifier
-					.fillMaxWidth()
-					.padding(vertical = 16.dp),
+						.fillMaxWidth()
+						.padding(vertical = 16.dp),
 					noteOrder = state.noteOrder,
 					onOrderChange = {
 						viewModel.onEvent(NotesEvent.Order(it))

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DefaultRadioButton(
-	text: String, selected: Boolean, onCheck: () -> Unit, modifier: Modifier = Modifier
+		text: String, selected: Boolean, onSelect: () -> Unit, modifier: Modifier = Modifier
 ) {
 	Row(
 		modifier = modifier,
@@ -22,10 +22,10 @@ fun DefaultRadioButton(
 	) {
 		RadioButton(
 			selected = selected,
-			onClick = onCheck,
+			onClick = onSelect,
 			colors = RadioButtonDefaults.colors(
 				selectedColor = MaterialTheme.colorScheme.primary,
-				unselectedColor = MaterialTheme.colorScheme.background
+				unselectedColor = MaterialTheme.colorScheme.onBackground
 			)
 		)
 		Spacer(modifier = Modifier.width(8.dp))
