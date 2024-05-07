@@ -51,8 +51,7 @@ class MainActivity : ComponentActivity() {
 									defaultValue = -1
 								})
 						) {
-							val color = it.arguments?.getInt("noteColor")
-									?: -1
+							val color = it.arguments?.getInt("noteColor") ?: -1
 							AddEditNoteScreen(
 								navController = navController,
 								noteColor = color

@@ -23,6 +23,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -47,14 +48,12 @@ import kotlinx.coroutines.launch
 fun AddEditNoteScreen(
 		navController: NavController, noteColor: Int, viewModel: AddEditNoteViewModel = hiltViewModel()
 ) {
-	val titleSTate = viewModel.noteTitle.value
+	val titleState = viewModel.noteTitle.value
 	val contentState = viewModel.noteContent.value
 
 	val scaffoldState = remember {
 		SnackbarHostState()
 	}
-
-	val scope = rememberCoroutineScope()
 
 	val noteBackgroundAnimatable = remember {
 		Animatable(
@@ -62,17 +61,20 @@ fun AddEditNoteScreen(
 		)
 	}
 
+	val scope = rememberCoroutineScope()
+
 	LaunchedEffect(key1 = true) {
 		viewModel.eventFlow.collectLatest { event ->
 			when (event) {
-				is AddEditNoteViewModel.UiEvent.SaveNote -> {
-					navController.navigateUp()
-				}
-
 				is AddEditNoteViewModel.UiEvent.ShowSnackBar -> {
 					scaffoldState.showSnackbar(
-						message = event.message
+						message = event.message,
+						duration = SnackbarDuration.Short
 					)
+				}
+
+				is AddEditNoteViewModel.UiEvent.SaveNote -> {
+					navController.navigateUp()
 				}
 			}
 		}
@@ -82,8 +84,7 @@ fun AddEditNoteScreen(
 		FloatingActionButton(
 			onClick = {
 				viewModel.onEvent(AddEditNoteEvent.SaveNote)
-			},
-			Modifier.background(MaterialTheme.colorScheme.primary)
+			}
 		) {
 			Icon(
 				imageVector = Icons.Default.Save,
@@ -137,15 +138,15 @@ fun AddEditNoteScreen(
 			Spacer(Modifier.height(16.dp))
 
 			TransparentHintTextField(
-				text = titleSTate.text,
-				hint = titleSTate.hint,
+				text = titleState.text,
+				hint = titleState.hint,
 				onValueChange = {
 					viewModel.onEvent(AddEditNoteEvent.EnteredTitle(it))
 				},
 				onFocusChange = {
 					viewModel.onEvent(AddEditNoteEvent.ChangeTitleFocus(it))
 				},
-				isHintVisible = titleSTate.isHintVisible,
+				isHintVisible = titleState.isHintVisible,
 				singleLine = true,
 				textStyle = MaterialTheme.typography.headlineSmall
 			)
