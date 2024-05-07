@@ -41,10 +41,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.my.notes.feature_note.presentation.notes.components.NoteItem
 import com.my.notes.feature_note.presentation.notes.components.OrderSection
+import com.my.notes.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
 		navController: NavController, viewModel: NotesViewModel = hiltViewModel()
@@ -61,7 +61,7 @@ fun NotesScreen(
 		floatingActionButton = {
 			FloatingActionButton(
 				onClick = {
-
+						  navController.navigate(Screen.AddEditNoteScreen.route)
 				},
 				modifier = Modifier.background(MaterialTheme.colorScheme.primary),
 			) {
