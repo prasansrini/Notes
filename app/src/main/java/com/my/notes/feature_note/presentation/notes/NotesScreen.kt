@@ -98,8 +98,8 @@ fun NotesScreen(
 				exit = fadeOut() + slideOutVertically()
 			) {
 				OrderSection(modifier = Modifier
-						.fillMaxWidth()
-						.padding(vertical = 16.dp),
+					.fillMaxWidth()
+					.padding(vertical = 16.dp),
 					noteOrder = state.noteOrder,
 					onOrderChange = {
 						viewModel.onEvent(NotesEvent.Order(it))
@@ -114,6 +114,9 @@ fun NotesScreen(
 						modifier = Modifier
 							.fillMaxWidth()
 							.clickable {
+								navController.navigate(
+									Screen.AddEditNoteScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
+								)
 							},
 						onDeleteClick = {
 							viewModel.onEvent(NotesEvent.Delete(note))
