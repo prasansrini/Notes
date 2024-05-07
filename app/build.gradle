@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -79,8 +80,8 @@ dependencies {
     //Dagger - Hilt
     implementation libs.hilt.android
     kapt libs.hilt.android.compiler
-    implementation libs.androidx.hilt.lifecycle.viewmodel
     kapt libs.androidx.hilt.compiler
+    kapt libs.hilt.compiler
 
     // Room
     implementation libs.androidx.room.runtime
@@ -88,4 +89,8 @@ dependencies {
 
     // Kotlin Extensions and Coroutines support for Room
     implementation libs.androidx.room.ktx
+}
+
+kapt {
+    correctErrorTypes true
 }

@@ -1,5 +1,6 @@
 package com.my.notes.feature_note.presentation.add_edit_note
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -41,6 +42,7 @@ import com.my.notes.feature_note.presentation.add_edit_note.components.Transpare
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AddEditNoteScreen(
 		navController: NavController, noteColor: Int, viewModel: AddEditNoteViewModel = hiltViewModel()
