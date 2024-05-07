@@ -114,7 +114,6 @@ fun NotesScreen(
 						modifier = Modifier
 							.fillMaxWidth()
 							.clickable {
-
 							},
 						onDeleteClick = {
 							viewModel.onEvent(NotesEvent.Delete(note))

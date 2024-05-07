@@ -70,7 +70,7 @@ fun OrderSection(
 
 			DefaultRadioButton(
 
-				text = "Ascending",
+				text = "Descending",
 				selected = noteOrder.orderByType is OrderByType.Descending,
 				onSelect = { onOrderChange(noteOrder.copy(OrderByType.Descending)) }
 

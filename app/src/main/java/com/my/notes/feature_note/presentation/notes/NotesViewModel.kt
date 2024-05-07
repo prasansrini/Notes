@@ -69,7 +69,8 @@ class NotesViewModel @Inject constructor(
 			.getNotes(noteOrder)
 			.onEach { notes ->
 				_state.value = state.value.copy(
-					notes = notes
+					notes = notes,
+					noteOrder = noteOrder
 				)
 			}
 			.launchIn(viewModelScope)
