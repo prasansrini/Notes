@@ -109,4 +109,13 @@ class NotesScreenTest {
 			.onNodeWithText(context.getString(R.string.order_color))
 			.assertIsDisplayed()
 	}
+
+	@Test
+	fun addButton_isVisible() {
+		val context = ApplicationProvider.getApplicationContext<Context>()
+
+		composeRule
+			.onNodeWithContentDescription(context?.getString(R.string.add_note_content_description)!!)
+			.assertIsDisplayed()
+	}
 }
