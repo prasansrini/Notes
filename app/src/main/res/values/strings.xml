@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="sort">Sort</string>
+    <string name="notes_title">Your notes</string>
+    <string name="add_note_content_description">Add note</string>
+    <string name="note_deleted">Note deleted!</string>
+    <string name="note_deleted_undo">undo</string>
 </resources>

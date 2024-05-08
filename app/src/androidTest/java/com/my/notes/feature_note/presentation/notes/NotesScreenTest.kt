@@ -69,4 +69,22 @@ class NotesScreenTest {
 			.onNodeWithTag(ORDER_SECTION)
 			.assertIsDisplayed()
 	}
+
+	@Test
+	fun clickToggleOrderSection_isNotVisible() {
+		val context = ApplicationProvider.getApplicationContext<Context>()
+
+		composeRule
+			.onNodeWithTag(ORDER_SECTION)
+			.assertDoesNotExist()
+
+		composeRule
+			.onNodeWithContentDescription(context?.getString(R.string.sort)!!)
+			.performClick()
+			.performClick()
+
+		composeRule
+			.onNodeWithTag(ORDER_SECTION)
+			.assertDoesNotExist()
+	}
 }

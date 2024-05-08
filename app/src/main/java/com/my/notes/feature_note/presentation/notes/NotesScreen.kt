@@ -67,7 +67,7 @@ fun NotesScreen(
 			}) {
 				Icon(
 					imageVector = Icons.Default.Add,
-					contentDescription = "Add note",
+					contentDescription = stringResource(R.string.add_note_content_description),
 				)
 			}
 		}) {
@@ -82,7 +82,7 @@ fun NotesScreen(
 				verticalAlignment = Alignment.CenterVertically
 			) {
 				Text(
-					text = "Your notes",
+					text = stringResource(R.string.notes_title),
 					style = MaterialTheme.typography.headlineSmall
 				)
 				IconButton(onClick = {
@@ -109,6 +109,8 @@ fun NotesScreen(
 					})
 			}
 			Spacer(modifier = Modifier.height(16.dp))
+			val snackMessage = stringResource(R.string.note_deleted)
+			val snackUndoMessage = stringResource(R.string.note_deleted_undo)
 			LazyColumn(
 				Modifier.fillMaxSize()
 			) {
@@ -122,11 +124,12 @@ fun NotesScreen(
 								)
 							},
 						onDeleteClick = {
+
 							viewModel.onEvent(NotesEvent.Delete(note))
 							scope.launch {
 								val result = scaffoldState.showSnackbar(
-									message = "Note deleted!",
-									actionLabel = "Undo",
+									message = snackMessage,
+									actionLabel = snackUndoMessage,
 									duration = SnackbarDuration.Short
 								)
 
