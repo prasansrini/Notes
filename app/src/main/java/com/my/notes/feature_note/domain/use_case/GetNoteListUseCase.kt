@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class GetNoteListUseCase(
-	private val repository: NoteRepository
+		private val repository: NoteRepository
 ) {
 	operator fun invoke(
-		noteOrder: NoteOrder = NoteOrder.Date(OrderByType.Descending)
+			noteOrder: NoteOrder = NoteOrder.Date(OrderByType.Descending)
 	): Flow<List<Note>> {
 		return repository
 			.getAllNotes()
