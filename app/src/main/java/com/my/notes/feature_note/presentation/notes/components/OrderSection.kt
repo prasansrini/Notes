@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.LightGray
@@ -24,7 +25,7 @@ fun OrderSection(
 	Column(
 		modifier = modifier
 	) {
-		Divider(
+		VerticalDivider(
 			color = LightGray,
 			modifier = Modifier
 				.height(1.dp)
@@ -64,7 +65,7 @@ fun OrderSection(
 			)
 		}
 
-		Divider(
+		VerticalDivider(
 			color = LightGray,
 			modifier = Modifier
 				.height(1.dp)
@@ -94,7 +95,7 @@ fun OrderSection(
 			)
 		}
 
-		Divider(
+		VerticalDivider(
 			color = LightGray,
 			modifier = Modifier
 				.height(1.dp)

@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -107,7 +108,7 @@ fun AddEditNoteScreen(
 					.padding(8.dp),
 				horizontalArrangement = Arrangement.SpaceBetween
 			) {
-				Icon(imageVector = Icons.Default.ArrowBack,
+				Icon(imageVector = Icons.Default.ArrowBackIosNew,
 					contentDescription = "Back",
 					modifier = Modifier
 						.size(40.dp)
