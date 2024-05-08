@@ -1,13 +1,16 @@
 package com.my.notes.feature_note.domain.use_case
 
 import com.google.common.truth.Truth.assertThat
+import com.my.notes.feature_note.domain.model.InvalidNoteException
 import com.my.notes.feature_note.domain.model.Note
 import com.my.notes.feature_note.domain.repository.FakeRepository
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 
 class AddNoteTest {
+
 	private lateinit var addNote: AddNote
 	private lateinit var fakeRepository: FakeRepository
 
@@ -42,20 +45,37 @@ class AddNoteTest {
 	fun `Add a note with empty title, throws @InvalidNoteException`() {
 		val id = 1
 
-		runBlocking {
-			fakeRepository.insertNote(
-				Note(
-					title = "",
-					content = "a",
-					timestamp = 1,
-					color = 1,
-					id = id
+		assertThrows(InvalidNoteException::class.java) {
+			runBlocking {
+				addNote(
+					Note(
+						title = "",
+						content = "a",
+						timestamp = 1,
+						color = 1,
+						id = id
+					)
 				)
-			)
+			}
 		}
+	}
 
-		runBlocking {
-			assertThat(fakeRepository.getNoteById(id)).isNotNull()
+	@Test
+	fun `Add a note with empty content, throws @InvalidNoteException`() {
+		val id = 1
+
+		assertThrows(InvalidNoteException::class.java) {
+			runBlocking {
+				addNote(
+					Note(
+						title = "a",
+						content = "",
+						timestamp = 1,
+						color = 1,
+						id = id
+					)
+				)
+			}
 		}
 	}
 }
