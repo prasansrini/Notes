@@ -35,9 +35,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.my.notes.R
+import com.my.notes.core.util.Constants.ORDER_SECTION
 import com.my.notes.feature_note.presentation.notes.components.NoteItem
 import com.my.notes.feature_note.presentation.notes.components.OrderSection
 import com.my.notes.feature_note.presentation.util.Screen
@@ -58,11 +62,9 @@ fun NotesScreen(
 
 	Scaffold(snackbarHost = { SnackbarHost(hostState = scaffoldState) },
 		floatingActionButton = {
-			FloatingActionButton(
-				onClick = {
-						  navController.navigate(Screen.AddEditNoteScreen.route)
-				}
-			) {
+			FloatingActionButton(onClick = {
+				navController.navigate(Screen.AddEditNoteScreen.route)
+			}) {
 				Icon(
 					imageVector = Icons.Default.Add,
 					contentDescription = "Add note",
@@ -88,7 +90,7 @@ fun NotesScreen(
 				}) {
 					Icon(
 						imageVector = Icons.Default.SortByAlpha,
-						contentDescription = "Sort"
+						contentDescription = stringResource(R.string.sort)
 					)
 				}
 			}
@@ -99,7 +101,8 @@ fun NotesScreen(
 			) {
 				OrderSection(modifier = Modifier
 					.fillMaxWidth()
-					.padding(vertical = 8.dp),
+					.padding(vertical = 8.dp)
+					.testTag(ORDER_SECTION),
 					noteOrder = state.noteOrder,
 					onOrderChange = {
 						viewModel.onEvent(NotesEvent.Order(it))
