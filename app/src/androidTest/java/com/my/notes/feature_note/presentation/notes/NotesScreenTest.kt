@@ -6,6 +6,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -86,5 +87,26 @@ class NotesScreenTest {
 		composeRule
 			.onNodeWithTag(ORDER_SECTION)
 			.assertDoesNotExist()
+	}
+
+	@Test
+	fun clickToggleOrderSection_isSubMenuVisible() {
+		val context = ApplicationProvider.getApplicationContext<Context>()
+
+		composeRule
+			.onNodeWithContentDescription(context?.getString(R.string.sort)!!)
+			.performClick()
+
+		composeRule
+			.onNodeWithText(context.getString(R.string.order_title))
+			.assertIsDisplayed()
+
+		composeRule
+			.onNodeWithText(context.getString(R.string.order_date))
+			.assertIsDisplayed()
+
+		composeRule
+			.onNodeWithText(context.getString(R.string.order_color))
+			.assertIsDisplayed()
 	}
 }

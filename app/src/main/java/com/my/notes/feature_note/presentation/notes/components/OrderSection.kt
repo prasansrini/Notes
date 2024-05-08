@@ -11,7 +11,9 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.my.notes.R
 import com.my.notes.feature_note.domain.util.NoteOrder
 import com.my.notes.feature_note.domain.util.OrderByType
 
@@ -37,7 +39,7 @@ fun OrderSection(
 		) {
 			DefaultRadioButton(
 
-				text = "Title",
+				text = stringResource(R.string.order_title),
 				selected = noteOrder is NoteOrder.Title,
 				onSelect = { onOrderChange(NoteOrder.Title(orderType = noteOrder.orderByType)) }
 
@@ -47,7 +49,7 @@ fun OrderSection(
 
 			DefaultRadioButton(
 
-				text = "Date",
+				text = stringResource(R.string.order_date),
 				selected = noteOrder is NoteOrder.Date,
 				onSelect = { onOrderChange(NoteOrder.Date(orderType = noteOrder.orderByType)) }
 
@@ -57,7 +59,7 @@ fun OrderSection(
 
 			DefaultRadioButton(
 
-				text = "Color",
+				text = stringResource(R.string.order_color),
 				selected = noteOrder is NoteOrder.Color,
 				onSelect = { onOrderChange(NoteOrder.Color(orderType = noteOrder.orderByType)) }
 
