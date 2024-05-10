@@ -33,6 +33,12 @@ import org.junit.Test
 @HiltAndroidTest
 @UninstallModules(AppModule::class)
 class NotesEndToEndTest {
+
+	private val TEST_TITLE = "test-title"
+	private val TEST_NEW = "new-"
+	private val TEST_NEW_TITLE = "new-test-title"
+	private val TEST_CONTENT = "test-content"
+
 	@get:Rule(order = 0)
 	val hiltRule = HiltAndroidRule(this)
 
@@ -89,42 +95,42 @@ class NotesEndToEndTest {
 
 		composeRule
 			.onNodeWithTag(TITLE_TEXT_FIELD)
-			.performTextInput("test-title")
+			.performTextInput(TEST_TITLE)
 
 		composeRule
 			.onNodeWithTag(CONTENT_TEXT_FIELD)
-			.performTextInput("test-content")
+			.performTextInput(TEST_CONTENT)
 
 		composeRule
 			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
 			.performClick()
 
 		composeRule
-			.onNodeWithText("test-title")
+			.onNodeWithText(TEST_TITLE)
 			.assertIsDisplayed()
 
 		composeRule
-			.onNodeWithText("test-title")
+			.onNodeWithText(TEST_TITLE)
 			.performClick()
 
 		composeRule
 			.onNodeWithTag(TITLE_TEXT_FIELD)
-			.assertTextEquals("test-title")
+			.assertTextEquals(TEST_TITLE)
 
 		composeRule
 			.onNodeWithTag(CONTENT_TEXT_FIELD)
-			.assertTextEquals("test-content")
+			.assertTextEquals(TEST_CONTENT)
 
 		composeRule
 			.onNodeWithTag(TITLE_TEXT_FIELD)
-			.performTextInput("new-")
+			.performTextInput(TEST_NEW)
 
 		composeRule
 			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
 			.performClick()
 
 		composeRule
-			.onNodeWithText("new-test-title")
+			.onNodeWithText(TEST_NEW_TITLE)
 			.assertIsDisplayed()
 	}
 }
