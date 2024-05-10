@@ -171,6 +171,43 @@ class NotesEndToEndTest {
 		}
 	}
 
+	@Test
+	fun saveNewNotes_orderByTitleAscending() {
+		val size = 3
+
+		for (i in 1..size) {
+			addNote(
+				i.toString(),
+				i.toString()
+			)
+		}
+
+		for (i in 1..size) {
+			composeRule
+				.onNodeWithText(i.toString())
+				.assertIsDisplayed()
+		}
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.sort))
+			.assertIsDisplayed()
+			.performClick()
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.order_title_radio_content_description))
+			.assertIsDisplayed()
+			.performClick()
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.radio_text_ascending))
+			.assertIsDisplayed()
+			.performClick()
+
+		for (i in 1..size) {
+			composeRule.onAllNodesWithTag(NOTE_ITEM)[i - 1].assertTextContains(i.toString())
+		}
+	}
+
 	private fun addNote(textInputTitle: String, textInputContent: String) {
 		composeRule
 			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.add_note_content_description))
