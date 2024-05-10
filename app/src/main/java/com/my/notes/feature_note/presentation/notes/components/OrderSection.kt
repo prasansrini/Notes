@@ -79,7 +79,7 @@ fun OrderSection(
 		) {
 			DefaultRadioButton(
 
-				text = "Ascending",
+				text = stringResource(R.string.radio_text_ascending),
 				selected = noteOrder.orderByType is OrderByType.Ascending,
 				onSelect = { onOrderChange(noteOrder.copy(OrderByType.Ascending)) }
 
@@ -89,7 +89,7 @@ fun OrderSection(
 
 			DefaultRadioButton(
 
-				text = "Descending",
+				text = stringResource(R.string.radio_text_descending),
 				selected = noteOrder.orderByType is OrderByType.Descending,
 				onSelect = { onOrderChange(noteOrder.copy(OrderByType.Descending)) }
 

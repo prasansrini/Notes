@@ -6,8 +6,11 @@
     <string name="note_deleted">Note deleted!</string>
     <string name="note_deleted_undo">undo</string>
     <string name="order_title">Title</string>
+    <string name="order_title_radio_content_description">Title</string>
     <string name="order_date">Date</string>
     <string name="order_color">Color</string>
     <string name="save_note_floating_content_description">Save note</string>
     <string name="back_content_description">Back</string>
+    <string name="radio_text_ascending">Ascending</string>
+    <string name="radio_text_descending">Descending</string>
 </resources>

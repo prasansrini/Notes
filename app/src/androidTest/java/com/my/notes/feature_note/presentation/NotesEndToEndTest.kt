@@ -2,8 +2,10 @@ package com.my.notes.feature_note.presentation
 
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -16,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.my.notes.R
 import com.my.notes.core.util.Constants.CONTENT_TEXT_FIELD
+import com.my.notes.core.util.Constants.NOTE_ITEM
 import com.my.notes.core.util.Constants.TITLE_TEXT_FIELD
 import com.my.notes.feature_note.di.AppModule
 import com.my.notes.feature_note.presentation.add_edit_note.AddEditNoteScreen
@@ -88,7 +91,10 @@ class NotesEndToEndTest {
 
 	@Test
 	fun saveNewNote() {
-		addNote()
+		addNote(
+			TEST_TITLE,
+			TEST_CONTENT
+		)
 
 		composeRule
 			.onNodeWithText(TEST_TITLE)
@@ -98,7 +104,10 @@ class NotesEndToEndTest {
 	@Test
 	fun editNotes() {
 
-		addNote()
+		addNote(
+			TEST_TITLE,
+			TEST_CONTENT
+		)
 
 		composeRule
 			.onNodeWithText(TEST_TITLE)
@@ -125,18 +134,55 @@ class NotesEndToEndTest {
 			.assertIsDisplayed()
 	}
 
-	private fun addNote() {
+	@Test
+	fun saveNewNotes_orderByTitleDescending() {
+		val size = 3
+
+		for (i in 1..size) {
+			addNote(
+				i.toString(),
+				i.toString()
+			)
+		}
+
+		for (i in 1..size) {
+			composeRule
+				.onNodeWithText(i.toString())
+				.assertIsDisplayed()
+		}
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.sort))
+			.assertIsDisplayed()
+			.performClick()
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.order_title_radio_content_description))
+			.assertIsDisplayed()
+			.performClick()
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.radio_text_descending))
+			.assertIsDisplayed()
+			.performClick()
+
+		for (i in 1..size) {
+			composeRule.onAllNodesWithTag(NOTE_ITEM)[i - 1].assertTextContains((size - i + 1).toString())
+		}
+	}
+
+	private fun addNote(textInputTitle: String, textInputContent: String) {
 		composeRule
 			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.add_note_content_description))
 			.performClick()
 
 		composeRule
 			.onNodeWithTag(TITLE_TEXT_FIELD)
-			.performTextInput(TEST_TITLE)
+			.performTextInput(textInputTitle)
 
 		composeRule
 			.onNodeWithTag(CONTENT_TEXT_FIELD)
-			.performTextInput(TEST_CONTENT)
+			.performTextInput(textInputContent)
 
 		composeRule
 			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
