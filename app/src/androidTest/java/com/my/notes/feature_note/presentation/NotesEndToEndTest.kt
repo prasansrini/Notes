@@ -1,15 +1,22 @@
 package com.my.notes.feature_note.presentation
 
 import androidx.activity.compose.setContent
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.my.notes.R
+import com.my.notes.core.util.Constants.CONTENT_TEXT_FIELD
+import com.my.notes.core.util.Constants.TITLE_TEXT_FIELD
 import com.my.notes.feature_note.di.AppModule
 import com.my.notes.feature_note.presentation.add_edit_note.AddEditNoteScreen
 import com.my.notes.feature_note.presentation.notes.NotesScreen
@@ -80,6 +87,44 @@ class NotesEndToEndTest {
 			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.add_note_content_description))
 			.performClick()
 
+		composeRule
+			.onNodeWithTag(TITLE_TEXT_FIELD)
+			.performTextInput("test-title")
 
+		composeRule
+			.onNodeWithTag(CONTENT_TEXT_FIELD)
+			.performTextInput("test-content")
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
+			.performClick()
+
+		composeRule
+			.onNodeWithText("test-title")
+			.assertIsDisplayed()
+
+		composeRule
+			.onNodeWithText("test-title")
+			.performClick()
+
+		composeRule
+			.onNodeWithTag(TITLE_TEXT_FIELD)
+			.assertTextEquals("test-title")
+
+		composeRule
+			.onNodeWithTag(CONTENT_TEXT_FIELD)
+			.assertTextEquals("test-content")
+
+		composeRule
+			.onNodeWithTag(TITLE_TEXT_FIELD)
+			.performTextInput("new-")
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
+			.performClick()
+
+		composeRule
+			.onNodeWithText("new-test-title")
+			.assertIsDisplayed()
 	}
 }
