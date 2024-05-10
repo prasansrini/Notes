@@ -30,15 +30,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+private const val TEST_TITLE = "test-title"
+private const val TEST_NEW = "new-"
+private const val TEST_NEW_TITLE = "new-test-title"
+private const val TEST_CONTENT = "test-content"
+
 @HiltAndroidTest
 @UninstallModules(AppModule::class)
 class NotesEndToEndTest {
-
-	private val TEST_TITLE = "test-title"
-	private val TEST_NEW = "new-"
-	private val TEST_NEW_TITLE = "new-test-title"
-	private val TEST_CONTENT = "test-content"
-
 	@get:Rule(order = 0)
 	val hiltRule = HiltAndroidRule(this)
 
@@ -88,26 +87,18 @@ class NotesEndToEndTest {
 	}
 
 	@Test
-	fun saveNewNote_editAfterwards() {
-		composeRule
-			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.add_note_content_description))
-			.performClick()
-
-		composeRule
-			.onNodeWithTag(TITLE_TEXT_FIELD)
-			.performTextInput(TEST_TITLE)
-
-		composeRule
-			.onNodeWithTag(CONTENT_TEXT_FIELD)
-			.performTextInput(TEST_CONTENT)
-
-		composeRule
-			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
-			.performClick()
+	fun saveNewNote() {
+		addNote()
 
 		composeRule
 			.onNodeWithText(TEST_TITLE)
 			.assertIsDisplayed()
+	}
+
+	@Test
+	fun editNotes() {
+
+		addNote()
 
 		composeRule
 			.onNodeWithText(TEST_TITLE)
@@ -132,5 +123,23 @@ class NotesEndToEndTest {
 		composeRule
 			.onNodeWithText(TEST_NEW_TITLE)
 			.assertIsDisplayed()
+	}
+
+	private fun addNote() {
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.add_note_content_description))
+			.performClick()
+
+		composeRule
+			.onNodeWithTag(TITLE_TEXT_FIELD)
+			.performTextInput(TEST_TITLE)
+
+		composeRule
+			.onNodeWithTag(CONTENT_TEXT_FIELD)
+			.performTextInput(TEST_CONTENT)
+
+		composeRule
+			.onNodeWithContentDescription(TEST_CONTEXT.getString(R.string.save_note_floating_content_description))
+			.performClick()
 	}
 }
