@@ -8,4 +8,6 @@
     <string name="order_title">Title</string>
     <string name="order_date">Date</string>
     <string name="order_color">Color</string>
+    <string name="save_note_floating_content_description">Save note</string>
+    <string name="back_content_description">Back</string>
 </resources>

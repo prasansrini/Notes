@@ -56,8 +56,6 @@ class MainActivity : ComponentActivity() {
 								navController = navController,
 								noteColor = color
 							)
-
-							//comment, testing Ktlint
 						}
 					}
 				}

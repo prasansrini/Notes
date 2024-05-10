@@ -38,9 +38,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.my.notes.R
 import com.my.notes.feature_note.domain.model.Note
 import com.my.notes.feature_note.presentation.add_edit_note.components.TransparentHintTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -83,17 +85,16 @@ fun AddEditNoteScreen(
 		}
 	}
 
-	Scaffold(
-		floatingActionButton = {
-			FloatingActionButton(onClick = {
-				viewModel.onEvent(AddEditNoteEvent.SaveNote)
-			}) {
-				Icon(
-					imageVector = Icons.Default.Save,
-					contentDescription = "Save note"
-				)
-			}
-		},
+	Scaffold(floatingActionButton = {
+		FloatingActionButton(onClick = {
+			viewModel.onEvent(AddEditNoteEvent.SaveNote)
+		}) {
+			Icon(
+				imageVector = Icons.Default.Save,
+				contentDescription = stringResource(R.string.save_note_floating_content_description)
+			)
+		}
+	},
 		snackbarHost = { SnackbarHost(hostState = scaffoldState) }) {
 		Column(
 			modifier = Modifier
@@ -108,7 +109,7 @@ fun AddEditNoteScreen(
 				horizontalArrangement = Arrangement.SpaceBetween
 			) {
 				Icon(imageVector = Icons.Default.ArrowBackIosNew,
-					contentDescription = "Back",
+					contentDescription = stringResource(R.string.back_content_description),
 					modifier = Modifier
 						.size(40.dp)
 						.padding(4.dp)
